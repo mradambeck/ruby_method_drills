@@ -3,25 +3,49 @@
 #########################
 #say_hello
   # returns 'hello'
+def say_hello
+  return 'hello'
+end
+
 
 #echo
   # returns the input string
 
+def echo(string)
+  string
+end
+
+
 #eddie_izzards_height
-  # calculates and returns Eddie Izzard's height 
+  # calculates and returns Eddie Izzard's height
   # takes in the height of heels he's wearing (default value: 0)
   # and adds heel height to his base 67 inches for the result
+
+def eddie_izzards_height (heel_height=0)
+  (heel_height + 67)
+end
+
 
 #how_many_args
   # accepts any number of arguments without complaint
   # returns the total number of arguments passed to the function
   # Hint: google ruby *args
 
-#find_answer 
+def how_many_args(*args)
+  count = 0
+  args.each {count += 1}
+  count
+end
+
+#find_answer
   # returns the value associated with the 'answer' keyword argument
   # returns nil if it cannot find the 'answer' keyword argument
   # complains when given non-keyword arguments
   # Hint: google ruby keyword arguments
+
+def find_answer(key={})
+  key[:answer]
+end
 
 ##############################
 #### MANIPULATING STRINGS ####
@@ -30,6 +54,9 @@
   # takes in a word
   # returns the first letter of the word
   # lowercases the first letter of the word
+def first_char(word)
+  return word[0].downcase
+end
 
 #polly_wanna
   # takes in a word
@@ -37,9 +64,17 @@
   # repeats the original word 3 times
   # returns a string with the word repeated
 
+def polly_wanna(word)
+  word + word + word
+end
+
 #count_chars
   # takes in a word
   # returns the number of characters in the word
+
+def count_chars(word)
+  word.size
+end
 
 #yell
   # takes in a message
@@ -47,18 +82,30 @@
   # adds an exclamation point to the end of the message
   # returns the message
 
+def yell(message)
+  message.upcase + "!"
+end
+
+
 ## STRETCH ##
 #to_telegram
   # takes in a message
   # replaces periods with ' STOP'
   # returns the updated message
 
+def to_telegram(message)
+  message.gsub('.', ' STOP')
+end
 
 #spell_out
   # takes in a string
   # converts the string to lowercase
   # returns the input string, with characters seperated by dashes
 
+def spell_out(str)
+  arr = str.downcase.split('')
+  arr.join("-")
+end
 
 #seperate
   # takes in a string
@@ -66,16 +113,31 @@
   # seperates characters with dashes (by default)
   # returns the modified string
 
+def seperate (string, seperator='-')
+  arr = string.split('')
+  arr.join(seperator)
+end
+
 ## STRETCH ##
 #croon
   # seperates word characters with dashes
   # preserves whitespace between words
+
+def croon(words)
+  arr = words.split('')
+  string = arr.join('-')
+  string.gsub('- -', ' ')
+end
 
 #palindrome_word?
   # determines whether a single word is a palindrome
   # ignores case
   # returns true or false
 
+def palindrome_word?(word)
+  word.downcase!
+  word == word.reverse
+end
 
 ## SUPER STRETCH ##
 #palindrome_sentence?
@@ -84,11 +146,21 @@
   # ignores whitespace
   # ignores punctuation
 
+def palindrome_sentence?(sentence)
+  stripped = sentence.downcase.gsub(/\W/, '')
+  stripped == stripped.reverse
+end
+
 #is_vowel
   # takes in a string of one character
   # determines whether the character is a vowel
   # ignores case
   # handles weird inputs gracefully
+
+def is_vowel(char)
+  char.to_s.downcase!
+  char == "a" || char == "e" || char == "i" || char == "o" || char == "u" || char == "y"
+end
 
 #add_period
   # takes in a string
@@ -106,19 +178,50 @@
   # counts the spaces in a string
   # returns number of spaces
 
+def count_spaces(string)
+  count = 0
+  str = string.split('')
+  str.each do |char|
+    if char == ' '
+      count += 1
+    end
+  end
+  count
+end
+
 #string_lengths
   # takes in an array of strings
   # returns an array containing the lengths of the strings
+
+def  string_lengths(args)
+  counts = Array.new
+  args.each do |str|
+    counts << str.length
+  end
+  counts
+end
 
 #remove_falsy_values
   # takes in a list
   # filters out falsy values from a list
   # returns the updated list
 
+def remove_falsy_values(list)
+  new_arr = Array.new
+  list.each do |str|
+    new_arr << str if !!str
+  end
+  new_arr
+end
+
 #exclude_last
   # takes in an array or string
   # removes the last item from the array or string
   # returns it
+
+def exclude_last(val)
+  val[0..-2]
+end
 
 #exclude_first
   # takes in an array or string
@@ -126,23 +229,67 @@
   # removes the first character from a string
   # returns a new string - does not alter the original input (non-destructive)
 
+def exclude_first(val)
+  val[1..-1]
+end
+
 #exclude_ends
   # takes in an array or string
   # removes the first and last items from an array
   # removes the first and last characters from a string
 
+def exclude_ends(val)
+  val[1..-2]
+end
+
 #select_every_even
   # takes in an array
   # returns a list of even-indexed items from the input
+
+def select_every_even(arr)
+  count = 0
+  new_arr = Array.new
+  arr.each do |i|
+    if count.even?
+      new_arr << i
+    end
+    count += 1
+  end
+  new_arr
+end
 
 #select_every_odd
   # takes in an array
   # returns a list of odd-indexed items
 
+def select_every_odd(arr)
+  count = 0
+  new_arr = Array.new
+  arr.each do |i|
+    if count.odd?
+      new_arr << i
+    end
+    count += 1
+  end
+  new_arr
+end
+
 #select_every_n
   # takes in an array
   # returns a list of items at an index evenly divisible by n
   # defaults to an n value of 1
+
+def select_every_n( arr, n=1 )
+  count = 0
+  new_arr = Array.new
+  arr.each do |i|
+    if (count % n) == 0
+      new_arr << i
+    end
+    count += 1
+  end
+  new_arr
+end
 
 ## STRETCH ##
 #compile_agenda
@@ -161,6 +308,15 @@
   # counts up or down
   # rounds off decimals
 
+def count_to(n)
+  n = n.to_i
+  if n >= 0
+    (0..n).to_a
+  else
+    0.downto(n).to_a
+  end
+end
+
 #is_integer?
   # takes in a number
   # returns true for Fixnums and Bignums (whole number or 'integer' types)
@@ -168,6 +324,11 @@
   # returns false for non-integer decimals
   # returns false for Float::NAN
   # returns false for non-numbers
+
+def is_integer?(num)
+  return false if num == nil || num.class == String
+  num % 1 == 0
+end
 
 #is_prime?
   # takes in a number and checks if it's prime
@@ -177,11 +338,25 @@
   # returns true for prime numbers
   # Hint: google prime numbers!
 
+def is_prime?(num)
+  return false if num <= 1 || num % 1 != 0
+  Math.sqrt(num).to_i.downto(2).each {|i| return false if num % i == 0}
+  true
+end
+
 #primes_less_than
   # takes in a number
   # returns an empty array if there are no primes below num
   # does not return the number itself
   # finds all primes less than the given number
+
+def primes_less_than(num)
+  prime_array = Array.new
+  (2..num-1).each do |i|
+    prime_array << i if is_prime?(i)
+  end
+  prime_array
+end
 
 ## STRETCH ##
 #iterative_factorial
@@ -202,6 +377,15 @@
   # ignores case
   # returns the hash
 
+def character_count(string)
+  string.downcase!
+  count = Hash.new(0)
+  for i in 0...string.length
+    count[string[i]] += 1
+  end
+  count
+end
+
 ## STRETCH ##
 #word_count
   # takes in a string
@@ -209,6 +393,18 @@
   # ignores case
   # ignores characters that are not in the sequence a-z
   # returns a hash with all the words and their counts
+
+# def word_count(string)
+#   string.downcase!
+#   string = string.gsub(/\d, '')
+#   string = string.gsub(/\W, '')
+#   arr = string.split(' ')
+#   count = Hash.new(0)
+#   for i in 0...arr.length
+#     count[arr[i]] += 1
+#   end
+#   count
+# end
 
 ## STRETCH ##
 #most_frequent_word
